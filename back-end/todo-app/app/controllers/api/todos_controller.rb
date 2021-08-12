@@ -1,25 +1,33 @@
 class Api::TodosController < ApplicationController
-  @@db = Api::Todo
+  @db = Api::Todo
 
   def index
-    render json: @@db.all
+    render json: @db.all
   end
+
   def create
-    render json: @@db.create(:content => todo_params[:content])
+    render json: @db.create(:content => todo_params[:content])
   end
+
   def update
-    reqParams = todo_params
-    render json: @@db.update(reqParams[:id], { :content => reqParams[:content], :checked => reqParams[:checked] })
+    req_params = todo_params
+    render json: @db.update(req_params[:id], { :content => req_params[:content], :checked => req_params[:checked] })
   end
+
   def delete
-    resParams = todo_params
-    @@db.delete(resParams[:id])
-    render json: resParams
+    res_params = todo_params
+    @db.delete(res_params[:id])
+    render json: res_params
   end
 
   def todo_params
-    return params.require(:todo).permit(:content) if params[:todo][:reqType] == 'create'
-    return params.require(:todo).permit(:id, :content, :checked) if params[:todo][:reqType] == 'update'
-    return params.require(:todo).permit(:id) if params[:todo][:reqType] == 'delete'
+    case params[:todo][:reqType]
+    when 'create'
+      params.require(:todo).permit(:content)
+    when 'update'
+      params.require(:todo).permit(:id, :content, :checked)
+    when 'delete'
+      params.require(:todo).permit(:id)
+    end
   end
 end
