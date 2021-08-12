@@ -1,3 +1,3 @@
-class Api::Todo < ApplicationRecord::Base
-    validates content: true
+class Api::Todo < ActiveRecord::Base
+    validates :content, presence: true
 end

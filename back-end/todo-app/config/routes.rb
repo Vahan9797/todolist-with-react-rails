@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   namespace :api do
     get 'todos', to: 'todos#index'
+    post 'create', to: 'todos#create'
+    patch 'update', to: 'todos#update'
+    delete 'delete', to: 'todos#delete'
   end
 
   get '*path', to: 'application#frontend_index_html', constraints: lambda { |request|

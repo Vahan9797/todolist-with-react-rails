@@ -13,6 +13,11 @@
 
 ActiveRecord::Schema.define(version: 20210811142941) do
 
+  create_table "api_todos", force: :cascade do |t|
+    t.string "content", null: false
+    t.boolean "checked", default: false
+    t.timestamps null: false
+  end
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
