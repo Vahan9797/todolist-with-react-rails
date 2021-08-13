@@ -1,3 +1,5 @@
+require 'sidekiq' # This line is for irb testing
+
 Sidekiq.configure_client do |config|
   config.redis = { db: 1 }
 end
