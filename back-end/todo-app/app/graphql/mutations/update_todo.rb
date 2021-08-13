@@ -1,6 +1,6 @@
 module Mutations
   class UpdateTodo < Mutations::BaseMutation
-    argument :params, Types::Input::TodoUpdateInputType, required: true
+    argument :params, Types::Input::TodoInputTypes::TodoUpdateInputType, required: true
 
     field :todo, Types::TodoType, null: false
 

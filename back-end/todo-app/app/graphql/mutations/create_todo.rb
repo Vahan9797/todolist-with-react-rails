@@ -1,6 +1,6 @@
 module Mutations
   class CreateTodo < Mutations::BaseMutation
-    argument :params, Types::Input::TodoContentInputType, required: true
+    argument :params, Types::Input::TodoInputTypes::TodoContentInputType, required: true
 
     field :todo, Types::TodoType, null: false
 

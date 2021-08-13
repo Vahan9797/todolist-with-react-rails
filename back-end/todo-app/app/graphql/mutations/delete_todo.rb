@@ -1,6 +1,6 @@
 module Mutations
   class DeleteTodo < Mutations::BaseMutation
-    argument :params, Types::Input::TodoIDInputType, required: true
+    argument :params, Types::Input::TodoInputTypes::TodoIDInputType, required: true
 
     field :id, ID, null: false
 
