@@ -11,14 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210811142941) do
+ActiveRecord::Schema.define(version: 20210816071608) do
 
-  create_table "api_todos", force: :cascade do |t|
-    t.string "content", null: false
-    t.boolean "checked", default: false
-    t.timestamps null: false
-  end
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "api_todos", force: :cascade do |t|
+    t.string   "content"
+    t.boolean  "checked",    default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "img_url"
+  end
 
 end

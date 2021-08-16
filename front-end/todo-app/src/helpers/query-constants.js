@@ -1,32 +1,42 @@
 import { gql } from '@apollo/client';
 
 const GET_TODOS = gql`
-    query GetTodoItems {
-
-    }
-`
-
-const CREATE_TODO = gql`
-    query CreateTodoItem {
-        todo {
+    query {
+        todos {
+            id
             content
-        }
-    }
-`
-
-const UPDATE_TODO = gql`
-    query UpdateTodoItem {
-        todo {
-            id,
-            content,
             checked
         }
     }
 `
 
+const CREATE_TODO = gql`
+    mutation($content: String!) {
+        createTodo(input: { params: { content: $content }}) {
+            todo {
+                id
+                content
+                checked
+            }
+        }
+    }
+`
+
+const UPDATE_TODO = gql`
+    mutation($id: ID!, $content: String!, $checked: Boolean) {
+        updateTodo(input: { params: { id: $id, content: $content, checked: $checked } }) {
+            todo {
+                id
+                content
+                checked
+            }
+        }
+    }
+`
+
 const DELETE_TODO = gql`
-    query DeleteTodoItem {
-        todo {
+    mutation($id: ID!) {
+        deleteTodo(input: { params: { id: $id }}) {
             id
         }
     }
