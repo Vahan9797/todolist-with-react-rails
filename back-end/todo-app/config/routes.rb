@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     get 'todos', to: 'todos#index'
     post 'create', to: 'todos#create'
     patch 'update', to: 'todos#update'
+    post 'upload-image', to: 'todos#upload_image'
     delete 'delete', to: 'todos#delete'
   end
 
