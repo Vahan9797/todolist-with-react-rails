@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20_210_817_091_223) do
     t.boolean  'checked', default: false
     t.datetime 'created_at',                        null: false
     t.datetime 'updated_at',                        null: false
-    t.string   'img'
+    t.string   'img_url'
     t.boolean  'img_is_compressed'
   end
 end

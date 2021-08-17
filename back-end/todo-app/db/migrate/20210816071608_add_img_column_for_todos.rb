@@ -2,6 +2,6 @@
 
 class AddImgColumnForTodos < ActiveRecord::Migration
   def change
-    add_column :api_todos, :img, :string, required: false
+    add_column :api_todos, :img_url, :string, required: false
   end
 end
