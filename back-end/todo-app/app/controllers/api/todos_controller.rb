@@ -16,13 +16,16 @@ class Api::TodosController < ApplicationController
 
   def upload_image
     req_params = todo_params
-    if(req_params[:img].instance_of?(ActionDispatch::Http::UploadedFile))
+    if req_params[:img].instance_of?(ActionDispatch::Http::UploadedFile)
+      file_ext_name = File.extname(req_params[:img].original_filename)
+      req_params[:img].original_filename[file_ext_name] = Time.now.to_s + file_ext_name
       ImageUploadWorker.perform_async(req_params[:img].tempfile.path, req_params[:img].original_filename)
     end
 
-    render text: ({
-      :img => req_params[:img],
-      :img_is_compressed => req_params[:img_is_compressed]}).to_s
+    render json: ({
+      :img_url => req_params[:img].original_filename,
+      :img_thumb_url => 'thumb_' + req_params[:img].original_filename,
+      :img_is_compressed => req_params[:img_is_compressed]}).to_json.force_encoding('UTF-8')
   end
 
   def delete

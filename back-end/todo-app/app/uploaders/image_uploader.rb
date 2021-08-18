@@ -23,6 +23,6 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   def store_dir
-    "uploads/images/#{mounted_as}/#{Time.now.to_s}"
+    "uploads/images/#{mounted_as}/"
   end
 end
