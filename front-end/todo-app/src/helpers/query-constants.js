@@ -5,17 +5,19 @@ const GET_TODOS = gql`
         todos {
             id
             content
+            imgUrl
             checked
         }
     }
 `
 
 const CREATE_TODO = gql`
-    mutation($content: String!) {
-        createTodo(input: { params: { content: $content }}) {
+    mutation($content: String!, $imgUrl: String) {
+        createTodo(input: { params: { content: $content, imgUrl: $imgUrl }}) {
             todo {
                 id
                 content
+                imgUrl
                 checked
             }
         }
@@ -23,11 +25,12 @@ const CREATE_TODO = gql`
 `
 
 const UPDATE_TODO = gql`
-    mutation($id: ID!, $content: String!, $checked: Boolean) {
-        updateTodo(input: { params: { id: $id, content: $content, checked: $checked } }) {
+    mutation($id: ID!, $content: String!, $imgUrl: String, $checked: Boolean) {
+        updateTodo(input: { params: { id: $id, content: $content, imgUrl: $imgUrl, checked: $checked } }) {
             todo {
                 id
                 content
+                imgUrl
                 checked
             }
         }

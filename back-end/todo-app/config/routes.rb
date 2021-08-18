@@ -16,6 +16,9 @@ Rails.application.routes.draw do
     !request.xhr? && request.format.html?
   }
 
+  # This line is for fixing React file upload error
+  post '/', to: 'application#frontend_index_html'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

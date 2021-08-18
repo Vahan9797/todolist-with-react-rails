@@ -28,6 +28,7 @@ gem 'carrierwave-imageoptimizer'
 gem 'graphql'
 gem 'mini_magick'
 gem 'rack-cors'
+gem 'searchkick', '3.1.3'
 gem 'sidekiq'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
