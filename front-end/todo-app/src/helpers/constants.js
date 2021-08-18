@@ -1,7 +1,15 @@
-import { Popconfirm, Button, Checkbox } from "antd";
+import { Popconfirm, Button, Checkbox, message } from "antd";
 import TodoModal from "../components/TodoModal";
+import { useMutation } from "@apollo/client";
+import { DELETE_TODO } from "./query-constants";
 
-const TABLE_COLUMNS = (clickHandler, deleteFunc) => {
+const TABLE_COLUMNS = () => {
+  const [deleteFunc, { data, loading, error }] = useMutation(DELETE_TODO);
+
+  if(error) {
+    message.error(error);
+  }
+
   return [
     {
       title: "Content",
@@ -27,7 +35,7 @@ const TABLE_COLUMNS = (clickHandler, deleteFunc) => {
     {
       title: "",
       key: "action",
-      render: (_text, record) => <TodoModal editModal={true} />,
+      render: _text => <TodoModal editModal={true} />,
     },
     {
       title: "",
@@ -35,11 +43,11 @@ const TABLE_COLUMNS = (clickHandler, deleteFunc) => {
       render: (_text, record) => (
         <Popconfirm
           title="Are you sure you want to delete this todo?"
-          onConfirm={() => deleteFunc(record.id)}
+          onConfirm={() => {deleteFunc({ input: { params: { id: +record.id } }})}}
           okText="Yes"
           cancelText="No"
         >
-          <Button type="danger" onClick={clickHandler}>
+          <Button type="danger" loading={loading}>
             DELETE
           </Button>
         </Popconfirm>

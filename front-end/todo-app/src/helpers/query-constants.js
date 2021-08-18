@@ -17,6 +17,7 @@ const CREATE_TODO = gql`
             todo {
                 id
                 content
+                imgUrl
                 checked
             }
         }

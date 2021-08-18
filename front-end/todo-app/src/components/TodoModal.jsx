@@ -69,8 +69,7 @@ const TodoModal = (props) => {
               accept=".png,.jpg,.jpeg,.bmp"
               listType="picture"
               fileList={fileList}
-              onChange={(e) => setFileList(e.fileList)}
-            >
+              onChange={(e) => setFileList(e.fileList)}>
               <Button>
                 <UploadOutlined />
                 Click to Upload
