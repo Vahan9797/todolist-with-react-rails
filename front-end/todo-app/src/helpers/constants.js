@@ -1,10 +1,13 @@
 import { Popconfirm, Button, Checkbox, message } from "antd";
 import TodoModal from "../components/TodoModal";
 import { useMutation } from "@apollo/client";
-import { DELETE_TODO } from "./query-constants";
+import { DELETE_TODO, UPDATE_TODO } from "./query-constants";
+import useTodosContext from "../contexts/useTodosContext";
 
-const TABLE_COLUMNS = () => {
-  const [deleteFunc, { data, loading, error }] = useMutation(DELETE_TODO);
+const TABLE_COLUMNS = onDeleteRow => {
+  const [deleteFunc, { loading, error }] = useMutation(DELETE_TODO);
+  const [checkedFunc] = useMutation(UPDATE_TODO);
+  const { deleteTodo, updateChecked } = useTodosContext();
 
   if(error) {
     message.error(error);
@@ -25,10 +28,13 @@ const TABLE_COLUMNS = () => {
       key: "checked",
       width: "12%",
       align: "center",
-      render: (value, record, rowIndex) => (
+      render: (value, record) => (
         <Checkbox
-          checked={value}
-          onChange={() => console.log(rowIndex, value)}
+          checked={record.checked}
+          onChange={({ target }) => {
+            checkedFunc({ variables: { id: record.id, content: record.content, checked: target.checked }})
+              .then(data => updateChecked(data))
+          }}
         />
       ),
     },
@@ -43,7 +49,7 @@ const TABLE_COLUMNS = () => {
       render: (_text, record) => (
         <Popconfirm
           title="Are you sure you want to delete this todo?"
-          onConfirm={() => {deleteFunc({ input: { params: { id: +record.id } }})}}
+          onConfirm={() => deleteFunc({variables: { id: +record.id }}).then(data => deleteTodo(data))}
           okText="Yes"
           cancelText="No"
         >

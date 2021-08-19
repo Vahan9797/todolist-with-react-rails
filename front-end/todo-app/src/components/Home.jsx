@@ -1,6 +1,7 @@
 import { Layout } from "antd";
 import React from "react";
 import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink } from "@apollo/client";
+import { TodosContextProvider } from '../contexts/TodosContext';
 import Todos from "./Todos";
 import '../styles/home.css';
 
@@ -21,7 +22,9 @@ const Home = () => (
       <div className="site-layout-content" style={{ margin: "100px auto" }}>
         <h1>Todo List</h1>
         <ApolloProvider client={client}>
-          <Todos />
+          <TodosContextProvider>
+            <Todos />
+          </TodosContextProvider>
         </ApolloProvider>
       </div>
     </Content>

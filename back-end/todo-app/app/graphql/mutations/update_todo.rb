@@ -12,7 +12,7 @@ module Mutations
       begin
         { todo: Api::Todo.update(req_params[:id], {
           content: req_params[:content],
-          img: req_params[:img],
+          img_url: req_params[:img_url],
           img_is_compressed: req_params[:img_is_compressed],
           checked: req_params[:checked]
         }) }
