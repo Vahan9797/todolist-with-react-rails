@@ -18,6 +18,6 @@ class ImageUploadWorker
     renamed_path = img_path.sub(File.basename(img_path), img_name)
     File.rename(img_path, renamed_path)
     img_file = File.open(renamed_path)
-    Image.new(:media => img_file).store_media! unless img_file.nil?
+    Image.new(media: img_file).store_media! unless img_file.nil?
   end
 end

@@ -3,7 +3,7 @@ module Queries
     type [Types::TodoType], null: false
 
     def resolve
-      Api::Todo.all
+      Todo.all
     end
   end
 end

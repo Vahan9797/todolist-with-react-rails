@@ -1,17 +1,15 @@
 class Api::TodosController < ApplicationController
-  @db = Api::Todo
-
   def index
-    render json: @db.all
+    render json: Todo.all
   end
 
   def create
-    render json: @db.create(:content => todo_params[:content])
+    render json: Todo.create(:content => todo_params[:content])
   end
 
   def update
     req_params = todo_params
-    render json: @db.update(req_params[:id], { :content => req_params[:content], :checked => req_params[:checked] })
+    render json: Todo.update(req_params[:id], { :content => req_params[:content], :checked => req_params[:checked] })
   end
 
   def upload_image
@@ -30,7 +28,7 @@ class Api::TodosController < ApplicationController
 
   def delete
     res_params = todo_params
-    @db.delete(res_params[:id])
+    Todo.delete(res_params[:id])
     render json: res_params
   end
 

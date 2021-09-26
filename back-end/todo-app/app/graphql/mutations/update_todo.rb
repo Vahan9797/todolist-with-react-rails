@@ -10,7 +10,7 @@ module Mutations
       req_params = Hash params
 
       begin
-        { todo: Api::Todo.update(req_params[:id], {
+        { todo: Todo.update(req_params[:id], {
           content: req_params[:content],
           img_url: req_params[:img_url],
           img_is_compressed: req_params[:img_is_compressed],
