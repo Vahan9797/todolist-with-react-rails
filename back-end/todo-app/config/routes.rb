@@ -12,6 +12,9 @@ Rails.application.routes.draw do
     delete 'delete', to: 'todos#delete'
   end
 
+  # Login page
+  get '/login', to: 'users#login'
+
   get '*path', to: 'application#frontend_index_html', constraints: lambda { |request|
     !request.xhr? && request.format.html?
   }
