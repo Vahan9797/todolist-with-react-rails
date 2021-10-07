@@ -31,10 +31,10 @@ const TABLE_COLUMNS = onDeleteRow => {
       render: (value, record) => (
         <Checkbox
           checked={record.checked}
-          onChange={({ target }) => {
+          onChange={debounce(({ target }) => {
             checkedFunc({ variables: { id: record.id, content: record.content, checked: target.checked }})
               .then(data => updateChecked(data))
-          }}
+          }, 100)}
         />
       ),
     },
